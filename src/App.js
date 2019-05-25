@@ -9,7 +9,7 @@ class App extends Component {
     this.state = {
       username: '',
       message: '',
-      allMessages: [],
+      allMessages: [], 
       messageInputDisabled: true,
       showHistory: false
     };

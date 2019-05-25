@@ -1,6 +1,6 @@
 
 let allMessages = [];
-
+ 
 module.exports = {
     getAllMessages: (req, res, next) => {
 

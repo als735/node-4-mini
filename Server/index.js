@@ -3,7 +3,7 @@ const express = require('express');
 const messageCtrl = require('./messagesCtrl');
 const session = require('express-session');
 
-const { SERVER_PORT, SESSION_SECRET } = process.env;
+const { PORT, SESSION_SECRET } = process.env;
 
 const app = express();
 
@@ -15,8 +15,9 @@ app.use(session({
     saveUninitialized: false,
     cookie: {
       maxAge: 1000 * 60 * 60
-    }
-  }));
+      }
+    })
+  );
 
   app.use((req, res, next) => {
     let badWords = ['knucklehead', 'jerk', 'internet explorer'];
@@ -32,11 +33,11 @@ app.use(session({
   });
 
 app.get('/api/messages', messageCtrl.getAllMessages);
-app.post('/api/messages', messageCtrl.createMessage);
+app.post('/api/message', messageCtrl.createMessage);
 app.get('/api/messages/history', messageCtrl.history);
 
-app.listen(SERVER_PORT, () => {
-    console.log(`Humming on Hostage ${ SERVER_PORT }`)
+app.listen(PORT, () => {
+    console.log(`Humming on Hostage ${PORT}`)
 })
 
 
