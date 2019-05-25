@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import HistoryModal from './components/HistoryModal';
 import './App.css';
+import axios from 'axios'; // We use axios to make HTTP requests from our react app to our node/ex[ress server so we can display them 
 
 class App extends Component {
   constructor(props) {
@@ -17,11 +18,21 @@ class App extends Component {
 
   
   componentDidMount() {
-    //create request here
+    axios.get('/api/messages').then(res => { // get request to node/express api 
+      this.setState({allMessages: res.data}); // Set state with the response. Update the allMessages property on state.
+    }); 
   }
 
   createMessage() {
-    //create request here
+    axios.post('/api/message', { // Send this.state.username and this.state.message in the body of the request. Use username and message property names 
+      username: this.state.username, 
+      message: this.state.message 
+    })
+    .then(res => {
+      this.setState({ // Set state with the response (which will be the updated array messages from the server) allMessages. 
+        allMessages: res.data
+      });  
+    });
   }
   
 
